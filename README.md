@@ -160,3 +160,41 @@ Filter incomplete tasks
         template: '<li><slot></slot></li>',
 
     });
+
+#### Lesson 8 - Nesting components
+
+Get data from component to the other component:
+
+    HTML
+
+    <task-list></task-list>
+
+
+    SCRIPT
+
+
+    Vue.component('task-list', {
+
+        template: '
+            <div>
+                <task v-for="task in tasks" v-bind:key="task.id">{{ task.description }}</task>
+            </div>
+        ',
+
+        data() {
+            return {
+                tasks: [
+                    { description: 'Go to the store', completed: true },
+                    { description: 'Finish screencast', completed: false },
+                    { description: 'Make donation', completed: false },
+                ]
+            };
+        }
+    });
+
+
+    Vue.component('task', {
+
+        template: '<li><slot></slot></li>'
+
+    });
