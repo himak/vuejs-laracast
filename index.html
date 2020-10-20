@@ -3,16 +3,22 @@
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
+		<style>
+			.color-red { color: red }
+			.color-blue { color: blue }
+			.is-loading { background: red }
+		</style>
 	</head>
 <body>
 
 	<div id="root">
-		<ul>
-			<li v-for="name in names" v-text="name"></li>
-		</ul>
 
-		<input id="input" type="text" v-model="newName">
-		<button @click="addName">Add Name</button>
+<!--		<h1 :class="className">Hello World</h1>-->
+
+<!--		<button :title="title">Hover Over Me</button>-->
+
+		<button :class="{ 'is-loading' : isLoading }" @click="toggleClass">Click Me</button>
+
 	</div>
 
 
@@ -24,27 +30,17 @@
 			el: '#root',
 
 			data: {
-				newName: '',
-				names: ['Joe', 'Mary', 'Jane', 'Jack']
+				// className: 'color-red',
+				// title: 'How the title is being set through JavaScript'
+				isLoading: false
 			},
 
 			methods: {
-
-				addName() {
-					this.names.push(this.newName);
-					this.newName = '';
+				toggleClass() {
+					this.isLoading = true;
 				}
-			},
+			}
 
-			// mounted() {
-			// 	document.querySelector('#button').addEventListener('click', () => {
-			//
-			// 		let name = document.querySelector('#input');
-			// 		app.names.push(name.value);
-			// 		name.value = '';
-			//
-			// 	});
-			// }
 		})
 	</script>
 

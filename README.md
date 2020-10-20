@@ -76,3 +76,29 @@ for Vue **v-on:click="addName"** in element like:
 
     <button v-on:click="addName">Add Name</button>
     <button @click="addName">Add Name</button>      // shorten
+
+#### Lesson 5 - Attribute and class binding
+
+    // CSS
+    .is-loading { background: red }
+
+
+    // HTML
+    <button :class="{ 'is-loading' : isLoading }" @click="toggleClass">Click Me</button>
+
+
+    // SCRIPT
+    data: {
+        isLoading: false
+    },
+
+    methods: {
+        toggleClass() {
+            this.isLoading = true;
+        }
+    }
+
+**TIP:** You can write short code:
+
+    <button v-bind:title="title">Hover Over Me</button>
+    <button :title="title">Hover Over Me</button>
