@@ -143,3 +143,20 @@ Filter incomplete tasks
             return this.tasks.filter(task => ! task.completed);
         }
     }
+
+#### Lesson 7 - Components
+
+    HTML
+
+    <task>Go to the store</task>
+    <task>Go to the bank</task>
+    <task>Go to work</task>
+
+
+    SCRIPT
+
+    Vue.component('task', {
+
+        template: '<li><slot></slot></li>',
+
+    });
