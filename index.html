@@ -7,14 +7,12 @@
 <body>
 
 	<div id="root">
-		<!-- {{ name }} -->
-
 		<ul>
 			<li v-for="name in names" v-text="name"></li>
 		</ul>
 
-		<input id="input" type="text">
-		<button id="button">Add Name</button>
+		<input id="input" type="text" v-model="newName">
+		<button v-on:click="addName">Add Name</button>
 	</div>
 
 
@@ -26,29 +24,28 @@
 			el: '#root',
 
 			data: {
-				// foo: 'bar',
-				// name: 'Joe',
+				newName: '',
 				names: ['Joe', 'Mary', 'Jane', 'Jack']
 			},
 
-			mounted() {
-				document.querySelector('#button').addEventListener('click', () => {
+			methods: {
 
-					let name = document.querySelector('#input');
-					app.names.push(name.value);
-					name.value = '';
+				addName() {
+					this.names.push(this.newName);
+					this.newName = '';
+				}
+			},
 
-				});
-			}
+			// mounted() {
+			// 	document.querySelector('#button').addEventListener('click', () => {
+			//
+			// 		let name = document.querySelector('#input');
+			// 		app.names.push(name.value);
+			// 		name.value = '';
+			//
+			// 	});
+			// }
 		})
-
-		// document.querySelector('#button').addEventListener('click', () => {
-		//
-		// 	let name = document.querySelector('#input');
-		// 	app.names.push(name.value);
-		// 	name.value = '';
-		//
-		// });
 	</script>
 
 </body>

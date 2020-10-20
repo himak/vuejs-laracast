@@ -59,3 +59,20 @@ Write in browser Console:
         })
     </script>
 
+#### Lesson 3 - Event listeners
+
+This code you can replace
+
+    document.querySelector('#button').addEventListener('click', () => {
+        // code ...
+    }
+
+for Vue **v-on:click="addName"** in element like:
+
+    <button id="button" v-on:click="addName">Add Name</button>
+
+
+**TIP:** You can write short code:
+
+    <button v-on:click="addName">Add Name</button>
+    <button @click="addName">Add Name</button>      // shorten
