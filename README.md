@@ -59,7 +59,7 @@ Write in browser Console:
         })
     </script>
 
-#### Lesson 3 - Event listeners
+#### Lesson 4 - Event listeners
 
 This code you can replace
 
