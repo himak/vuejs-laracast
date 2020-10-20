@@ -198,3 +198,84 @@ Get data from component to the other component:
         template: '<li><slot></slot></li>'
 
     });
+
+
+#### Lesson 9 - Exercise : Tabs
+
+We create dynamic navigation Tabs:
+
+    HTML
+
+    <tabs>
+        <tab name="About Us" :selected="true">
+            <h1>Here is the content for the about us tab.</h1>
+        </tab>
+
+        <tab name="About Our Culture">
+            <h1>Here is the content for the about culture tab.</h1>
+        </tab>
+
+        <tab name="About Our Vision">
+            <h1>Here is the content for the about vision tab.</h1>
+        </tab>
+    </tabs>
+
+
+    SCRIPT
+
+    Vue.component('tabs', {
+
+    	template: `
+    		<div>
+    			<div class="tabs">
+    				<ul>
+    					<li v-for="tab in tabs" :class="{ 'is-active' : tab.isActive }">
+    						<a :href="tab.href" @click="selectTab(tab)">{{ tab.name }}</a>
+    					</li>
+    				</ul>
+    			</div>
+
+    			<div class="tabs-details">
+    				<slot></slot>
+    			</div>
+    		</div>
+    	`,
+
+    	data() { return { tabs: [] } },
+
+    	created() { this.tabs = this.$children },
+
+    	methods: {
+    		selectTab(selectedTab) {
+    			this.tabs.forEach(tab => {
+    				tab.isActive = (tab.name == selectedTab.name);
+    			});
+    		}
+    	}
+    })
+
+
+    Vue.component('tab', {
+
+    	template: `
+    		<div v-show="isActive">
+    			<slot></slot>
+    		</div>
+    	`,
+
+    	props: {
+    		name: { required: true },
+    		selected: { default: false }
+    	},
+
+    	data() { return { isActive: false }; },
+
+    	computed: {
+    		href() {
+    			// 'About Our Culture' convert to '#about-our-culture'
+    			return '#' + this.name.toLowerCase().replace(/ /g, '-');
+    		}
+    	},
+
+    	mounted() { this.isActive = this.selected; }
+    })

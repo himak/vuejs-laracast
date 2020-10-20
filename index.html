@@ -2,18 +2,31 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title></title>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+
+		<style>
+			body { padding-top: 40px; }
+		</style>
 	</head>
 <body>
 
-	<div id="root">
+	<div id="root" class="container">
 
-<!--		<task>Go to the store</task>-->
-<!--		<task>Go to the bank</task>-->
-<!--		<task>Go to work</task>-->
+		<tabs>
+			<tab name="About Us" :selected="true">
+				<h1>Here is the content for the about us tab.</h1>
+			</tab>
 
-		<task-list></task-list>
+			<tab name="About Our Culture">
+				<h1>Here is the content for the about culture tab.</h1>
+			</tab>
 
+			<tab name="About Our Vision">
+				<h1>Here is the content for the about vision tab.</h1>
+			</tab>
+		</tabs>
 
 	</div>
 

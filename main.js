@@ -1,31 +1,62 @@
-Vue.component('task-list', {
+Vue.component('tabs', {
 
-	template: '' +
-		'<div>' +
-			'<task v-for="task in tasks" v-bind:key="task.id">{{ task.description }}</task>' +
-		'</div>',
+	template: `
+		<div>
+			<div class="tabs">
+				<ul>
+					<li v-for="tab in tabs" :class="{ 'is-active' : tab.isActive }">
+						<a :href="tab.href" @click="selectTab(tab)">{{ tab.name }}</a>
+					</li>
+				</ul>
+			</div>
 
-	data() {
-		return {
-			tasks: [
-				{ description: 'Go to the store', completed: true },
-				{ description: 'Finish screencast', completed: false },
-				{ description: 'Make donation', completed: false },
-				{ description: 'Clear inbox', completed: false },
-				{ description: 'Make dinner', completed: false },
-				{ description: 'Clean room', completed: true }
-			]
-		};
+			<div class="tabs-details">
+				<slot></slot>
+			</div>
+		</div>
+	`,
+
+	data() { return { tabs: [] } },
+
+	// debug
+	// mounted() { console.log(this.$children) }
+
+	created() { this.tabs = this.$children },
+
+	methods: {
+		selectTab(selectedTab) {
+			this.tabs.forEach(tab => {
+				tab.isActive = (tab.name == selectedTab.name);
+			});
+		}
 	}
+})
 
-});
 
+Vue.component('tab', {
 
-Vue.component('task', {
+	template: `
+		<div v-show="isActive">
+			<slot></slot>
+		</div>
+	`,
 
-	template: '<li><slot></slot></li>'
+	props: {
+		name: { required: true },
+		selected: { default: false }
+	},
 
-});
+	data() { return { isActive: false }; },
+
+	computed: {
+		href() {
+			// 'About Our Culture' convert to '#about-our-culture'
+			return '#' + this.name.toLowerCase().replace(/ /g, '-');
+		}
+	},
+
+	mounted() { this.isActive = this.selected; }
+})
 
 
 new Vue({
